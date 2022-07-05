@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "format",
+    srcs = [
+        "diagnostic.go",
+        "diff.go",
+        "format.go",
+        "object_id.go",
+        "plan.go",
+        "state.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/command/format",
+    importpath = "github.com/hashicorp/terraform/command/format",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/hcl2/hcl",
+        "//vendor/github.com/hashicorp/hcl2/hcled",
+        "//vendor/github.com/hashicorp/hcl2/hclparse",
+        "//vendor/github.com/hashicorp/terraform/addrs",
+        "//vendor/github.com/hashicorp/terraform/configs/configschema",
+        "//vendor/github.com/hashicorp/terraform/plans",
+        "//vendor/github.com/hashicorp/terraform/plans/objchange",
+        "//vendor/github.com/hashicorp/terraform/states",
+        "//vendor/github.com/hashicorp/terraform/terraform",
+        "//vendor/github.com/hashicorp/terraform/tfdiags",
+        "//vendor/github.com/mitchellh/colorstring",
+        "//vendor/github.com/mitchellh/go-wordwrap",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/json",
+    ],
+)

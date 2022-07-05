@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "plans",
+    srcs = [
+        "action.go",
+        "action_string.go",
+        "changes.go",
+        "changes_src.go",
+        "changes_state.go",
+        "changes_sync.go",
+        "doc.go",
+        "dynamic_value.go",
+        "plan.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/plans",
+    importpath = "github.com/hashicorp/terraform/plans",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/terraform/addrs",
+        "//vendor/github.com/hashicorp/terraform/configs/configschema",
+        "//vendor/github.com/hashicorp/terraform/states",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/msgpack",
+    ],
+)

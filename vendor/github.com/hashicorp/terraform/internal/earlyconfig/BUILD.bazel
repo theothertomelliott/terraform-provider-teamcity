@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "earlyconfig",
+    srcs = [
+        "config.go",
+        "config_build.go",
+        "diagnostics.go",
+        "doc.go",
+        "module.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/internal/earlyconfig",
+    importpath = "github.com/hashicorp/terraform/internal/earlyconfig",
+    visibility = ["//vendor/github.com/hashicorp/terraform:__subpackages__"],
+    deps = [
+        "//vendor/github.com/hashicorp/go-version",
+        "//vendor/github.com/hashicorp/terraform-config-inspect/tfconfig",
+        "//vendor/github.com/hashicorp/terraform/addrs",
+        "//vendor/github.com/hashicorp/terraform/moduledeps",
+        "//vendor/github.com/hashicorp/terraform/plugin/discovery",
+        "//vendor/github.com/hashicorp/terraform/tfdiags",
+    ],
+)

@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "provisioners",
+    srcs = [
+        "doc.go",
+        "factory.go",
+        "provisioner.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/provisioners",
+    importpath = "github.com/hashicorp/terraform/provisioners",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/terraform/configs/configschema",
+        "//vendor/github.com/hashicorp/terraform/tfdiags",
+        "//vendor/github.com/zclconf/go-cty/cty",
+    ],
+)

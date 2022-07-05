@@ -28,3 +28,9 @@ data_dir/
 
 #Local Testing environment
 .test.env
+
+# Bazel
+bazel-bin
+bazel-out
+bazel-terraform-provider-TeamCity
+bazel-testlogs

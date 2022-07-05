@@ -1,0 +1,37 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "initwd",
+    srcs = [
+        "copy_dir.go",
+        "doc.go",
+        "from_module.go",
+        "getter.go",
+        "inode.go",
+        "inode_freebsd.go",
+        "inode_windows.go",
+        "load_config.go",
+        "module_install.go",
+        "module_install_hooks.go",
+        "testing.go",
+        "version_required.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/internal/initwd",
+    importpath = "github.com/hashicorp/terraform/internal/initwd",
+    visibility = ["//vendor/github.com/hashicorp/terraform:__subpackages__"],
+    deps = [
+        "//vendor/github.com/hashicorp/go-cleanhttp",
+        "//vendor/github.com/hashicorp/go-getter",
+        "//vendor/github.com/hashicorp/go-version",
+        "//vendor/github.com/hashicorp/terraform-config-inspect/tfconfig",
+        "//vendor/github.com/hashicorp/terraform/addrs",
+        "//vendor/github.com/hashicorp/terraform/configs",
+        "//vendor/github.com/hashicorp/terraform/configs/configload",
+        "//vendor/github.com/hashicorp/terraform/internal/earlyconfig",
+        "//vendor/github.com/hashicorp/terraform/internal/modsdir",
+        "//vendor/github.com/hashicorp/terraform/registry",
+        "//vendor/github.com/hashicorp/terraform/registry/regsrc",
+        "//vendor/github.com/hashicorp/terraform/tfdiags",
+        "//vendor/github.com/hashicorp/terraform/version",
+    ],
+)

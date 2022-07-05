@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "gen",
+    srcs = [
+        "code.go",
+        "gen.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/golang.org/x/text/internal/gen",
+    importpath = "golang.org/x/text/internal/gen",
+    visibility = ["//vendor/golang.org/x/text:__subpackages__"],
+    deps = ["//vendor/golang.org/x/text/unicode/cldr"],
+)

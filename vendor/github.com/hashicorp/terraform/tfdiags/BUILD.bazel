@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "tfdiags",
+    srcs = [
+        "config_traversals.go",
+        "contextual.go",
+        "diagnostic.go",
+        "diagnostic_base.go",
+        "diagnostics.go",
+        "doc.go",
+        "error.go",
+        "hcl.go",
+        "rpc_friendly.go",
+        "severity_string.go",
+        "simple_warning.go",
+        "source_range.go",
+        "sourceless.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/tfdiags",
+    importpath = "github.com/hashicorp/terraform/tfdiags",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/errwrap",
+        "//vendor/github.com/hashicorp/go-multierror",
+        "//vendor/github.com/hashicorp/hcl2/hcl",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/gocty",
+    ],
+)

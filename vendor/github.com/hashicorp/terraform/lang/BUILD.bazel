@@ -1,0 +1,31 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "lang",
+    srcs = [
+        "data.go",
+        "doc.go",
+        "eval.go",
+        "functions.go",
+        "references.go",
+        "scope.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/lang",
+    importpath = "github.com/hashicorp/terraform/lang",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/hcl2/ext/dynblock",
+        "//vendor/github.com/hashicorp/hcl2/hcl",
+        "//vendor/github.com/hashicorp/hcl2/hcldec",
+        "//vendor/github.com/hashicorp/terraform/addrs",
+        "//vendor/github.com/hashicorp/terraform/configs/configschema",
+        "//vendor/github.com/hashicorp/terraform/lang/blocktoattr",
+        "//vendor/github.com/hashicorp/terraform/lang/funcs",
+        "//vendor/github.com/hashicorp/terraform/tfdiags",
+        "//vendor/github.com/zclconf/go-cty-yaml",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/convert",
+        "//vendor/github.com/zclconf/go-cty/cty/function",
+        "//vendor/github.com/zclconf/go-cty/cty/function/stdlib",
+    ],
+)

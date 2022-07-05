@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "parser",
+    srcs = [
+        "binary_op.go",
+        "error.go",
+        "parser.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/hil/parser",
+    importpath = "github.com/hashicorp/hil/parser",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/hil/ast",
+        "//vendor/github.com/hashicorp/hil/scanner",
+    ],
+)

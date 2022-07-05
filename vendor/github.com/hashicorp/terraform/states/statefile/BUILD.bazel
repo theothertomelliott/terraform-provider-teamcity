@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "statefile",
+    srcs = [
+        "diagnostics.go",
+        "doc.go",
+        "file.go",
+        "marshal_equal.go",
+        "read.go",
+        "version0.go",
+        "version1.go",
+        "version1_upgrade.go",
+        "version2.go",
+        "version2_upgrade.go",
+        "version3.go",
+        "version3_upgrade.go",
+        "version4.go",
+        "write.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/states/statefile",
+    importpath = "github.com/hashicorp/terraform/states/statefile",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/go-version",
+        "//vendor/github.com/hashicorp/terraform/addrs",
+        "//vendor/github.com/hashicorp/terraform/states",
+        "//vendor/github.com/hashicorp/terraform/tfdiags",
+        "//vendor/github.com/hashicorp/terraform/version",
+        "//vendor/github.com/mitchellh/copystructure",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/json",
+    ],
+)

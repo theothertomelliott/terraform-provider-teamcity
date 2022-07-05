@@ -1,0 +1,10 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "version",
+    srcs = ["version.go"],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/version",
+    importpath = "github.com/hashicorp/terraform/version",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/hashicorp/go-version"],
+)

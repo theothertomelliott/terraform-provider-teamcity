@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "response",
+    srcs = [
+        "module.go",
+        "module_list.go",
+        "module_provider.go",
+        "module_versions.go",
+        "pagination.go",
+        "provider.go",
+        "provider_list.go",
+        "redirect.go",
+        "terraform_provider.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/registry/response",
+    importpath = "github.com/hashicorp/terraform/registry/response",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/hashicorp/go-version"],
+)

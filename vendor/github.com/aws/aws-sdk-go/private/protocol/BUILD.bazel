@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "protocol",
+    srcs = [
+        "host.go",
+        "host_prefix.go",
+        "idempotency.go",
+        "jsonvalue.go",
+        "payload.go",
+        "timestamp.go",
+        "unmarshal.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/aws/aws-sdk-go/private/protocol",
+    importpath = "github.com/aws/aws-sdk-go/private/protocol",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/aws/aws-sdk-go/aws",
+        "//vendor/github.com/aws/aws-sdk-go/aws/client/metadata",
+        "//vendor/github.com/aws/aws-sdk-go/aws/request",
+    ],
+)

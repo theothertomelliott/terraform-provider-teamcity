@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "convert",
+    srcs = [
+        "diagnostics.go",
+        "schema.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/plugin/convert",
+    importpath = "github.com/hashicorp/terraform/plugin/convert",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/terraform/configs/configschema",
+        "//vendor/github.com/hashicorp/terraform/internal/tfplugin5",
+        "//vendor/github.com/hashicorp/terraform/providers",
+        "//vendor/github.com/hashicorp/terraform/tfdiags",
+        "//vendor/github.com/zclconf/go-cty/cty",
+    ],
+)

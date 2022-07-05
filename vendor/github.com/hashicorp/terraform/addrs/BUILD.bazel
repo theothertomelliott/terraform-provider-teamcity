@@ -1,0 +1,37 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "addrs",
+    srcs = [
+        "count_attr.go",
+        "doc.go",
+        "input_variable.go",
+        "instance_key.go",
+        "local_value.go",
+        "module.go",
+        "module_call.go",
+        "module_instance.go",
+        "output_value.go",
+        "parse_ref.go",
+        "parse_target.go",
+        "path_attr.go",
+        "provider_config.go",
+        "referenceable.go",
+        "resource.go",
+        "resource_phase.go",
+        "resourcemode_string.go",
+        "self.go",
+        "targetable.go",
+        "terraform_attr.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/addrs",
+    importpath = "github.com/hashicorp/terraform/addrs",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/hcl2/hcl",
+        "//vendor/github.com/hashicorp/hcl2/hcl/hclsyntax",
+        "//vendor/github.com/hashicorp/terraform/tfdiags",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/gocty",
+    ],
+)

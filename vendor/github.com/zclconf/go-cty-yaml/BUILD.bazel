@@ -1,0 +1,31 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go-cty-yaml",
+    srcs = [
+        "apic.go",
+        "converter.go",
+        "cty_funcs.go",
+        "decode.go",
+        "emitterc.go",
+        "encode.go",
+        "error.go",
+        "implied_type.go",
+        "parserc.go",
+        "readerc.go",
+        "resolve.go",
+        "scannerc.go",
+        "writerc.go",
+        "yaml.go",
+        "yamlh.go",
+        "yamlprivateh.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/zclconf/go-cty-yaml",
+    importpath = "github.com/zclconf/go-cty-yaml",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/convert",
+        "//vendor/github.com/zclconf/go-cty/cty/function",
+    ],
+)

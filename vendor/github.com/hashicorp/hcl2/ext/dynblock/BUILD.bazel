@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "dynblock",
+    srcs = [
+        "expand_body.go",
+        "expand_spec.go",
+        "expr_wrap.go",
+        "iteration.go",
+        "public.go",
+        "schema.go",
+        "unknown_body.go",
+        "variables.go",
+        "variables_hcldec.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/hcl2/ext/dynblock",
+    importpath = "github.com/hashicorp/hcl2/ext/dynblock",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/hcl2/hcl",
+        "//vendor/github.com/hashicorp/hcl2/hcldec",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/convert",
+    ],
+)

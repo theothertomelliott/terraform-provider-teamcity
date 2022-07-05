@@ -1,0 +1,10 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "didyoumean",
+    srcs = ["name_suggestion.go"],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/helper/didyoumean",
+    importpath = "github.com/hashicorp/terraform/helper/didyoumean",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/agext/levenshtein"],
+)

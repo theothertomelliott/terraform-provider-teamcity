@@ -1,0 +1,10 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "hilmapstructure",
+    srcs = ["hilmapstructure.go"],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/helper/hilmapstructure",
+    importpath = "github.com/hashicorp/terraform/helper/hilmapstructure",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/mitchellh/mapstructure"],
+)

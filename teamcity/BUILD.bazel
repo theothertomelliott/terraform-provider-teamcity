@@ -1,0 +1,57 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "teamcity",
+    srcs = [
+        "config.go",
+        "data_source_project.go",
+        "importer.go",
+        "provider.go",
+        "resource_agent_requirement.go",
+        "resource_artifact_dependency.go",
+        "resource_build_config.go",
+        "resource_build_trigger_build_finish.go",
+        "resource_build_trigger_schedule.go",
+        "resource_build_trigger_vcs.go",
+        "resource_feature_commit_status_publisher.go",
+        "resource_project.go",
+        "resource_snapshot_dependency.go",
+        "resource_vcs_root_git.go",
+        "structure.go",
+    ],
+    importpath = "github.com/yext/terraform-provider-teamcity/teamcity",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/terraform/helper/hashcode",
+        "//vendor/github.com/hashicorp/terraform/helper/schema",
+        "//vendor/github.com/hashicorp/terraform/helper/validation",
+        "//vendor/github.com/hashicorp/terraform/terraform",
+        "@com_github_robfig_cron//:cron",
+        "@com_github_yext_go_teamcity//teamcity",
+    ],
+)
+
+go_test(
+    name = "teamcity_test",
+    srcs = [
+        "data_source_project_test.go",
+        "provider_test.go",
+        "resource_agent_requirement_test.go",
+        "resource_artifact_dependency_test.go",
+        "resource_build_config_test.go",
+        "resource_build_trigger_build_finish_test.go",
+        "resource_build_trigger_schedule_test.go",
+        "resource_build_trigger_vcs_test.go",
+        "resource_feature_commit_status_publisher_test.go",
+        "resource_project_test.go",
+        "resource_snapshot_dependency_test.go",
+        "resource_vcs_root_git_test.go",
+    ],
+    deps = [
+        ":teamcity",
+        "//vendor/github.com/hashicorp/terraform/helper/resource",
+        "//vendor/github.com/hashicorp/terraform/helper/schema",
+        "//vendor/github.com/hashicorp/terraform/terraform",
+        "@com_github_yext_go_teamcity//teamcity",
+    ],
+)

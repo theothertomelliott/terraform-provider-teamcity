@@ -1,0 +1,28 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "json",
+    srcs = [
+        "ast.go",
+        "didyoumean.go",
+        "doc.go",
+        "navigation.go",
+        "parser.go",
+        "peeker.go",
+        "public.go",
+        "scanner.go",
+        "structure.go",
+        "tokentype_string.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/hcl2/hcl/json",
+    importpath = "github.com/hashicorp/hcl2/hcl/json",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/agext/levenshtein",
+        "//vendor/github.com/apparentlymart/go-textseg/textseg",
+        "//vendor/github.com/hashicorp/hcl2/hcl",
+        "//vendor/github.com/hashicorp/hcl2/hcl/hclsyntax",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/convert",
+    ],
+)

@@ -1,0 +1,36 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "discovery",
+    srcs = [
+        "error.go",
+        "find.go",
+        "get.go",
+        "get_cache.go",
+        "hashicorp.go",
+        "meta.go",
+        "meta_set.go",
+        "requirements.go",
+        "signature.go",
+        "version.go",
+        "version_set.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/plugin/discovery",
+    importpath = "github.com/hashicorp/terraform/plugin/discovery",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/errwrap",
+        "//vendor/github.com/hashicorp/go-getter",
+        "//vendor/github.com/hashicorp/go-multierror",
+        "//vendor/github.com/hashicorp/go-version",
+        "//vendor/github.com/hashicorp/terraform/httpclient",
+        "//vendor/github.com/hashicorp/terraform/registry",
+        "//vendor/github.com/hashicorp/terraform/registry/regsrc",
+        "//vendor/github.com/hashicorp/terraform/registry/response",
+        "//vendor/github.com/hashicorp/terraform/svchost/disco",
+        "//vendor/github.com/hashicorp/terraform/tfdiags",
+        "//vendor/github.com/hashicorp/terraform/version",
+        "//vendor/github.com/mitchellh/cli",
+        "//vendor/golang.org/x/crypto/openpgp",
+    ],
+)

@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "iam",
+    srcs = ["iam.go"],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/cloud.google.com/go/iam",
+    importpath = "cloud.google.com/go/iam",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/googleapis/gax-go/v2:gax-go",
+        "//vendor/google.golang.org/genproto/googleapis/iam/v1:iam",
+        "//vendor/google.golang.org/grpc",
+        "//vendor/google.golang.org/grpc/codes",
+        "//vendor/google.golang.org/grpc/metadata",
+    ],
+)

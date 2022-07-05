@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "registry",
+    srcs = [
+        "client.go",
+        "errors.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/registry",
+    importpath = "github.com/hashicorp/terraform/registry",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/terraform/httpclient",
+        "//vendor/github.com/hashicorp/terraform/registry/regsrc",
+        "//vendor/github.com/hashicorp/terraform/registry/response",
+        "//vendor/github.com/hashicorp/terraform/svchost",
+        "//vendor/github.com/hashicorp/terraform/svchost/disco",
+        "//vendor/github.com/hashicorp/terraform/version",
+    ],
+)

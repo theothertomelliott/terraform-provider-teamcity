@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "tfconfig",
+    srcs = [
+        "diagnostic.go",
+        "doc.go",
+        "load.go",
+        "load_hcl.go",
+        "load_legacy.go",
+        "module.go",
+        "module_call.go",
+        "output.go",
+        "provider_ref.go",
+        "resource.go",
+        "schema.go",
+        "source_pos.go",
+        "variable.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform-config-inspect/tfconfig",
+    importpath = "github.com/hashicorp/terraform-config-inspect/tfconfig",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/hcl",
+        "//vendor/github.com/hashicorp/hcl/hcl/ast",
+        "//vendor/github.com/hashicorp/hcl/hcl/parser",
+        "//vendor/github.com/hashicorp/hcl/hcl/token",
+        "//vendor/github.com/hashicorp/hcl2/gohcl",
+        "//vendor/github.com/hashicorp/hcl2/hcl",
+        "//vendor/github.com/hashicorp/hcl2/hcl/hclsyntax",
+        "//vendor/github.com/hashicorp/hcl2/hclparse",
+        "//vendor/github.com/zclconf/go-cty/cty/json",
+    ],
+)

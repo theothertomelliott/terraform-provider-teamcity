@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go-loghttp",
+    srcs = [
+        "loghttp.go",
+        "loghttp_go16.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/motemen/go-loghttp",
+    importpath = "github.com/motemen/go-loghttp",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/motemen/go-nuts/roundtime"],
+)

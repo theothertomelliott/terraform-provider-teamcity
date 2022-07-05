@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "build",
+    srcs = [
+        "builder.go",
+        "colelem.go",
+        "contract.go",
+        "order.go",
+        "table.go",
+        "trie.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/golang.org/x/text/collate/build",
+    importpath = "golang.org/x/text/collate/build",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/golang.org/x/text/internal/colltab",
+        "//vendor/golang.org/x/text/language",
+        "//vendor/golang.org/x/text/unicode/norm",
+    ],
+)

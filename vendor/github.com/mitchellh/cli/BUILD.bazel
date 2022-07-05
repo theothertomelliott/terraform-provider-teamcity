@@ -1,0 +1,28 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cli",
+    srcs = [
+        "autocomplete.go",
+        "cli.go",
+        "command.go",
+        "command_mock.go",
+        "help.go",
+        "ui.go",
+        "ui_colored.go",
+        "ui_concurrent.go",
+        "ui_mock.go",
+        "ui_writer.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/mitchellh/cli",
+    importpath = "github.com/mitchellh/cli",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/armon/go-radix",
+        "//vendor/github.com/bgentry/speakeasy",
+        "//vendor/github.com/fatih/color",
+        "//vendor/github.com/mattn/go-isatty",
+        "//vendor/github.com/posener/complete",
+        "//vendor/github.com/posener/complete/cmd/install",
+    ],
+)

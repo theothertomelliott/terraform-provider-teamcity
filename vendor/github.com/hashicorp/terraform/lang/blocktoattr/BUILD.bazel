@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "blocktoattr",
+    srcs = [
+        "doc.go",
+        "fixup.go",
+        "schema.go",
+        "variables.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/lang/blocktoattr",
+    importpath = "github.com/hashicorp/terraform/lang/blocktoattr",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/hcl2/ext/dynblock",
+        "//vendor/github.com/hashicorp/hcl2/hcl",
+        "//vendor/github.com/hashicorp/hcl2/hcldec",
+        "//vendor/github.com/hashicorp/terraform/configs/configschema",
+        "//vendor/github.com/zclconf/go-cty/cty",
+    ],
+)

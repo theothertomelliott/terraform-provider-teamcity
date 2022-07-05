@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "modsdir",
+    srcs = [
+        "doc.go",
+        "manifest.go",
+        "paths.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/internal/modsdir",
+    importpath = "github.com/hashicorp/terraform/internal/modsdir",
+    visibility = ["//vendor/github.com/hashicorp/terraform:__subpackages__"],
+    deps = [
+        "//vendor/github.com/hashicorp/go-version",
+        "//vendor/github.com/hashicorp/terraform/addrs",
+    ],
+)

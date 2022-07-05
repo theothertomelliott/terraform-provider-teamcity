@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "states",
+    srcs = [
+        "doc.go",
+        "eachmode_string.go",
+        "instance_generation.go",
+        "instance_object.go",
+        "instance_object_src.go",
+        "module.go",
+        "objectstatus_string.go",
+        "output_value.go",
+        "resource.go",
+        "state.go",
+        "state_deepcopy.go",
+        "state_equal.go",
+        "state_string.go",
+        "sync.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/states",
+    importpath = "github.com/hashicorp/terraform/states",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/terraform/addrs",
+        "//vendor/github.com/hashicorp/terraform/config/hcl2shim",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/json",
+    ],
+)

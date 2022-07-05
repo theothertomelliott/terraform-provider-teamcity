@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "validation",
+    srcs = ["validation.go"],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/helper/validation",
+    importpath = "github.com/hashicorp/terraform/helper/validation",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/terraform/helper/schema",
+        "//vendor/github.com/hashicorp/terraform/helper/structure",
+    ],
+)

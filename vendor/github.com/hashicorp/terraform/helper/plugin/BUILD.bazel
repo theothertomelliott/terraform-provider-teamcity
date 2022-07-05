@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "plugin",
+    srcs = [
+        "doc.go",
+        "grpc_provider.go",
+        "grpc_provisioner.go",
+        "unknown.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/helper/plugin",
+    importpath = "github.com/hashicorp/terraform/helper/plugin",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/terraform/config/hcl2shim",
+        "//vendor/github.com/hashicorp/terraform/configs/configschema",
+        "//vendor/github.com/hashicorp/terraform/helper/schema",
+        "//vendor/github.com/hashicorp/terraform/internal/tfplugin5",
+        "//vendor/github.com/hashicorp/terraform/plugin/convert",
+        "//vendor/github.com/hashicorp/terraform/terraform",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/convert",
+        "//vendor/github.com/zclconf/go-cty/cty/msgpack",
+        "//vendor/golang.org/x/net/context",
+    ],
+)

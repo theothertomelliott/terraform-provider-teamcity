@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "configschema",
+    srcs = [
+        "coerce_value.go",
+        "decoder_spec.go",
+        "doc.go",
+        "empty_value.go",
+        "implied_type.go",
+        "internal_validate.go",
+        "nestingmode_string.go",
+        "none_required.go",
+        "schema.go",
+        "validate_traversal.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/configs/configschema",
+    importpath = "github.com/hashicorp/terraform/configs/configschema",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/go-multierror",
+        "//vendor/github.com/hashicorp/hcl2/hcl",
+        "//vendor/github.com/hashicorp/hcl2/hcl/hclsyntax",
+        "//vendor/github.com/hashicorp/hcl2/hcldec",
+        "//vendor/github.com/hashicorp/terraform/helper/didyoumean",
+        "//vendor/github.com/hashicorp/terraform/tfdiags",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/convert",
+    ],
+)

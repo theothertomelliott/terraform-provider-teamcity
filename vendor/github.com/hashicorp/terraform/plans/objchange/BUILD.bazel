@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "objchange",
+    srcs = [
+        "all_null.go",
+        "compatible.go",
+        "doc.go",
+        "lcs.go",
+        "normalize_obj.go",
+        "objchange.go",
+        "plan_valid.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/plans/objchange",
+    importpath = "github.com/hashicorp/terraform/plans/objchange",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/terraform/configs/configschema",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/convert",
+    ],
+)

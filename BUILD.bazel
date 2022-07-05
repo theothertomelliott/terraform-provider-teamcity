@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/yext/terraform-provider-teamcity
+gazelle(name = "gazelle")
+
+go_library(
+    name = "terraform-provider-teamcity_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/yext/terraform-provider-teamcity",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//teamcity",
+        "//vendor/github.com/hashicorp/terraform/plugin",
+    ],
+)
+
+go_binary(
+    name = "terraform-provider-teamcity",
+    embed = [":terraform-provider-teamcity_lib"],
+    visibility = ["//visibility:public"],
+)

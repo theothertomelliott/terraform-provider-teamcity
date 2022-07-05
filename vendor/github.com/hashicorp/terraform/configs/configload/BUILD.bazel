@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "configload",
+    srcs = [
+        "copy_dir.go",
+        "doc.go",
+        "getter.go",
+        "inode.go",
+        "inode_freebsd.go",
+        "inode_windows.go",
+        "loader.go",
+        "loader_load.go",
+        "loader_snapshot.go",
+        "module_mgr.go",
+        "source_addr.go",
+        "testing.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/configs/configload",
+    importpath = "github.com/hashicorp/terraform/configs/configload",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/hashicorp/go-cleanhttp",
+        "//vendor/github.com/hashicorp/go-getter",
+        "//vendor/github.com/hashicorp/go-version",
+        "//vendor/github.com/hashicorp/hcl2/hcl",
+        "//vendor/github.com/hashicorp/terraform/configs",
+        "//vendor/github.com/hashicorp/terraform/internal/modsdir",
+        "//vendor/github.com/hashicorp/terraform/registry",
+        "//vendor/github.com/hashicorp/terraform/registry/regsrc",
+        "//vendor/github.com/hashicorp/terraform/svchost/disco",
+        "//vendor/github.com/spf13/afero",
+    ],
+)

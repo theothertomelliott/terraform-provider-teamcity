@@ -1,0 +1,33 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "funcs",
+    srcs = [
+        "cidr.go",
+        "collection.go",
+        "conversion.go",
+        "crypto.go",
+        "datetime.go",
+        "encoding.go",
+        "filesystem.go",
+        "number.go",
+        "string.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/lang/funcs",
+    importpath = "github.com/hashicorp/terraform/lang/funcs",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/apparentlymart/go-cidr/cidr",
+        "//vendor/github.com/hashicorp/go-uuid",
+        "//vendor/github.com/hashicorp/hcl2/hcl",
+        "//vendor/github.com/hashicorp/hcl2/hcl/hclsyntax",
+        "//vendor/github.com/mitchellh/go-homedir",
+        "//vendor/github.com/satori/go.uuid:go_uuid",
+        "//vendor/github.com/zclconf/go-cty/cty",
+        "//vendor/github.com/zclconf/go-cty/cty/convert",
+        "//vendor/github.com/zclconf/go-cty/cty/function",
+        "//vendor/github.com/zclconf/go-cty/cty/function/stdlib",
+        "//vendor/github.com/zclconf/go-cty/cty/gocty",
+        "//vendor/golang.org/x/crypto/bcrypt",
+    ],
+)

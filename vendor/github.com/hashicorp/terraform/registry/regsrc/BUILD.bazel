@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "regsrc",
+    srcs = [
+        "friendly_host.go",
+        "module.go",
+        "regsrc.go",
+        "terraform_provider.go",
+    ],
+    importmap = "github.com/yext/terraform-provider-teamcity/vendor/github.com/hashicorp/terraform/registry/regsrc",
+    importpath = "github.com/hashicorp/terraform/registry/regsrc",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/hashicorp/terraform/svchost"],
+)
