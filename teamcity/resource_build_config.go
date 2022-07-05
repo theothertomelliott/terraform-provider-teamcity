@@ -309,7 +309,7 @@ func resourceBuildConfigUpdate(d *schema.ResourceData, meta interface{}) error {
 			return err
 		}
 	}
-
+	
 	var changed bool
 	if d.HasChange("config_params") || d.HasChange("env_params") || d.HasChange("sys_params") ||
 		d.HasChange("config_params_specs") || d.HasChange("env_params_specs") || d.HasChange("sys_params_specs") {
