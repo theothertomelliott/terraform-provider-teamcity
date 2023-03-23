@@ -173,6 +173,11 @@ func resourceBuildTriggerSchedule() *schema.Resource {
 				Optional: true,
 				Default:  "<default>",
 			},
+			"env_params": {
+				Type:     schema.TypeMap,
+				Optional: true,
+				ForceNew: true,
+			},
 		},
 	}
 }
@@ -314,12 +319,6 @@ func expandTriggerScheduleOptions(d *schema.ResourceData) (*api.TriggerScheduleO
 	if v, ok := d.GetOkExists("promote_watched_build"); ok {
 		opt.PromoteWatchedBuild = v.(bool)
 	}
-	if v, ok := d.GetOkExists("enforce_clean_checkout"); ok {
-		opt.EnforceCleanCheckout = v.(bool)
-	}
-	if v, ok := d.GetOkExists("enforce_clean_checkout_dependencies"); ok {
-		opt.EnforceCleanCheckoutForDependencies = v.(bool)
-	}
 	if v, ok := d.GetOkExists("only_if_watched_changes"); ok {
 		opt.TriggerIfWatchedBuildChanges = v.(bool)
 	}
@@ -331,6 +330,24 @@ func expandTriggerScheduleOptions(d *schema.ResourceData) (*api.TriggerScheduleO
 	}
 	if v, ok := d.GetOkExists("watched_branch"); ok {
 		opt.RevisionRuleBuildBranch = v.(string)
+	}
+
+	enforceCleanCheckout, enforceCleanCheckoutSet := d.GetOkExists("enforce_clean_checkout")
+	enforceCleanCheckoutDependencies, enforceCleanCheckoutDependenciesSet := d.GetOkExists("enforce_clean_checkout_dependencies")
+	envParams, envParamsSet := d.GetOk("env_params")
+
+	if enforceCleanCheckoutSet || enforceCleanCheckoutDependenciesSet || envParamsSet {
+		customization := api.NewBuildTriggerCustomization()
+		customization.EnforceCleanCheckout = enforceCleanCheckout.(bool)
+		customization.EnforceCleanCheckoutForDependencies = enforceCleanCheckoutDependencies.(bool)
+		if envParamsSet {
+			parameters, err := expandEnvParams(envParams.(map[string]interface{}))
+			if err != nil {
+				return nil, err
+			}
+			customization.Parameters = parameters
+		}
+		opt.BuildCustomization = customization
 	}
 
 	return opt, nil
@@ -381,6 +398,18 @@ func expandCronSchedule(v []interface{}) (*api.CronSchedule, error) {
 	return &cronSchedule, nil
 }
 
+func expandEnvParams(raw map[string]interface{}) (*api.Parameters, error) {
+	out := api.NewParametersEmpty()
+	for k, v := range raw {
+		p, err := api.NewParameter(api.ParameterTypes.EnvironmentVariable, k, v.(string))
+		if err != nil {
+			return nil, err
+		}
+		out.AddOrReplaceParameter(p)
+	}
+	return out, nil
+}
+
 func flattenTriggerScheduleOptions(dt *api.TriggerScheduleOptions) map[string]interface{} {
 	out := make(map[string]interface{})
 	out["queue_optimization"] = dt.QueueOptimization
@@ -392,19 +421,32 @@ func flattenTriggerScheduleOptions(dt *api.TriggerScheduleOptions) map[string]in
 	if dt.BuildOnAllCompatibleAgents {
 		out["on_all_compatible_agents"] = dt.BuildOnAllCompatibleAgents
 	}
-	if dt.EnforceCleanCheckout {
-		out["enforce_clean_checkout"] = dt.EnforceCleanCheckout
-	}
-	if dt.EnforceCleanCheckoutForDependencies {
-		out["enforce_clean_checkout_dependencies"] = dt.EnforceCleanCheckoutForDependencies
-	}
 	if dt.TriggerIfWatchedBuildChanges {
 		out["only_if_watched_changes"] = dt.TriggerIfWatchedBuildChanges
 	}
 	if dt.RevisionRuleSourceBuildID != "" {
 		out["watched_build_config_id"] = dt.RevisionRuleSourceBuildID
 	}
+	if dt.BuildCustomization != nil {
+		if dt.BuildCustomization.EnforceCleanCheckout {
+			out["enforce_clean_checkout"] = dt.BuildCustomization.EnforceCleanCheckout
+		}
+		if dt.BuildCustomization.EnforceCleanCheckoutForDependencies {
+			out["enforce_clean_checkout_dependencies"] = dt.BuildCustomization.EnforceCleanCheckoutForDependencies
+		}
 
+		env_params := make(map[string]string)
+		if dt.BuildCustomization.Parameters != nil {
+			for _, p := range dt.BuildCustomization.Parameters.Items {
+				// don't support parameter types other than environment variable
+				if p.Type != api.ParameterTypes.EnvironmentVariable {
+					continue
+				}
+				env_params[p.Name] = p.Value
+			}
+			out["env_params"] = env_params
+		}
+	}
 	return out
 }
 
